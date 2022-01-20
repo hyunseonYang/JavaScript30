@@ -74,8 +74,16 @@
 
     soundButtonList.forEach((button) => {
       const buttonKey = button.dataset.key
-      button.addEventListener("click", () => playSound(buttonKey))
+      button.addEventListener("click", () => {
+        button.classList.add("playing")
+        playSound(buttonKey)
+      })
+
+      button.addEventListener('transitionend', () => {
+        button.classList.remove('playing');
+      });
     })
+
   </script>
 
 
