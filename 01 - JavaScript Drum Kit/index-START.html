@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 
@@ -57,10 +59,34 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
+  <script>
+    const soundButtonList = document.querySelectorAll(".key")
+    const soundTrackList = document.querySelectorAll("audio")
 
-</script>
+    function playSound(key) {
+      soundTrackList.forEach((sound) => {
+        const soundKey = sound.dataset.key
+        if (key === soundKey) {
+          sound.play()
+        }
+      })
+    }
+
+    soundButtonList.forEach((button) => {
+      const buttonKey = button.dataset.key
+      button.addEventListener("click", () => {
+        button.classList.add("playing")
+        playSound(buttonKey)
+      })
+
+      button.addEventListener('transitionend', () => {
+        button.classList.remove('playing');
+      });
+    })
+
+  </script>
 
 
 </body>
+
 </html>
